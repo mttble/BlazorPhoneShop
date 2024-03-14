@@ -66,5 +66,14 @@
     {
         int maxDays = 30;
         int productDateAfterUploaded = (DateTime.Now - dateUploaded).Days;
+        return productDateAfterUploaded <= maxDays ? "New" : null!;
+    }
+
+    string GetDescription(string description)
+    {
+        string appendDots = "...";
+        int maxLength = 40;
+        int descriptionLength = description.Length;
+        return descriptionLength > maxLength ? $"{description.Substring(0, 100)}{appendDots}" : description;
     }
 }
