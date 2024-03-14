@@ -26,12 +26,12 @@ public class ClientServices(HttpClient httpClient) : IProduct
     public async Task<ServiceResponse> AddProduct(Product model)
     {
         var response = await httpClient.PostAsync(BaseUrl, GenerateStringContent(SerializeObj(model)));
-        
+    
         if (!response.IsSuccessStatusCode)
-            return new ServiceResponse(false, "Error occured. Try again later...");
+            return new ServiceResponse(false, "Error occurred. Try again later...");
 
         var apiResponse = await response.Content.ReadAsStringAsync();
-        return DeserializeJsonString<ServiceResponse>(apiResponse);
+        return DeserializeObj<ServiceResponse>(apiResponse);
     }
 
     public async Task<List<Product>> GetAllProducts(bool featuredProducts)
